@@ -4,3 +4,7 @@
     name: "consul"
     state: restarted
   listen: restart_service
+
+- name: Reload Systemd
+  command: systemctl daemon-reload
+  listen: systemd_reload

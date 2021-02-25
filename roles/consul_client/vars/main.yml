@@ -1,7 +1,8 @@
 version: 1.8.3-2
 latest: true
-consul_datacenter_name: "consul_agent_server"
+consul_datacenter_name: "dc1"
 consul_data_dir: "/opt/consul"
 consul_username: "consul"
 consul_groupname: "consul"
 enable_script_check: "true"
+log_level: "INFO"

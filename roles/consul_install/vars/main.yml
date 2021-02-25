@@ -1,5 +1,5 @@
 version: 1.8.3-2
-latest: true
+latest: false
 consul_config_dir: "/etc/consul.d"
 client_address: "0.0.0.0"
 server_bool: "true"

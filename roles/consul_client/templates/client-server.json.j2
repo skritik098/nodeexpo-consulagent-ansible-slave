@@ -1,10 +1,10 @@
 {
-“bootstrap”: false,
-“server”: true,
-“datacenter”: “{{ consul_datacenter_name }}”,
-“data_dir”: “{{ consul_data_dir }}”,
-“encrypt”: “{{ consul_key.stdout }}”,
-“log_level”: “{{ log_level }}”,
-“enable_syslog”: true,
-“start_join”: [ {% for item in groups[‘all’] %} “{{ hostvars[item].ansible_default_ipv4.address }}” {% if not loop.last %} , {% endif %} {% endfor %} ]
+"bootstrap": false,
+"server": true,
+"datacenter": "{{ consul_datacenter_name }}",
+"data_dir": "{{ consul_data_dir }}",
+"encrypt": "{{ consul_key.stdout }}",
+"log_level": "{{ log_level }}",
+"enable_syslog": true,
+"start_join": [ {% for item in groups['all'] %} "{{ hostvars[item].ansible_default_ipv4.address }}" {% if not loop.last %} , {% endif %} {% endfor %} ]
 }

@@ -1,2 +1,11 @@
 ---
 # handlers file for consul_bootstrap
+- name: Reload Systemd
+  command: systemctl daemon-reload
+  listen: systemd_reload
+
+- name: Restart the service
+  service:
+    name: "consul"
+    state: restarted
+  listen: restart_service

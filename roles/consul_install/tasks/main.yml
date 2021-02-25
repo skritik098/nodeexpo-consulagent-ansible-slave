@@ -2,17 +2,36 @@
   yum:
     name: "yum-utils"
     state: present
-
-# - name: Add the repo
-#   command: "yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo"
-#   changed_when: true
-
-- name: Add repository
-  yum_repository:
-    name: Consul
-    description: Consul Hashicorp Repo
-    baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
   when: ansible_facts['os_family'] != "Debian"
+
+- name: Add the repo
+  command: "yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo"
+  changed_when: true
+  when: ansible_facts['os_family'] != "Debian"
+
+- name: Add consul repo key on ubuntu
+  shell: "curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
+  changed_when: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add consul repo
+  shell: "apt-add-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com bionic main'"
+  changed_when: true
+  become: true
+  ignore_errors: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: install consul
+  apt:
+    name: consul
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+# - name: Add repository
+#   yum_repository:
+#     name: Consul
+#     description: Consul Hashicorp Repo
+#     baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+#   when: ansible_facts['os_family'] != "Debian"
 
 - name: Installing consul latest package
   yum:
@@ -31,8 +50,8 @@
   # failed_when: "'FAILED' in command_result.stderr"
 
 - assert:
-  that:
-  - "'Consul' in consul_version.stdout"
+    that:
+    - "'Consul' in consul_version.stdout"
 
 - name: Generate the consul encryption key
   command: "consul keygen"

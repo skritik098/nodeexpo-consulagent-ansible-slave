@@ -21,6 +21,21 @@
     group: "{{ groupId }}"
     owner: "{{ userId }}"
 
+- name: Install the required package
+  yum:
+    name:
+      - wget
+      - python3-firewall
+    state: present
+  when: ansible_facts['os_family'] != "Debian"
+
+- name: Install the package on ubuntu
+  apt:
+    name: 
+      - wget
+      # - python3-firewall
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Install prometheus node exporter
   unarchive:
@@ -61,20 +76,20 @@
     state: started
     enabled: yes
 
-- name: Adding the firewall rule
-  firewalld:
-    port: "9100/tcp"
-    state: enabled
-    permanent: yes
-    immediate: yes
-  when: ansible_facts['os_family'] != "Debian"
+# - name: Adding the firewall rule
+#   firewalld:
+#     port: "9100/tcp"
+#     state: enabled
+#     permanent: yes
+#     immediate: yes
+#   when: ansible_facts['os_family'] != "Debian"
 
-- name: Adding firewall rule for Debian
-  ufw:
-    rule: allow
-    port: "9100"
-    proto: "tcp"
-  when: ansible_facts['os_family']  == "Debian"
+# - name: Adding firewall rule for Debian
+#   ufw:
+#     rule: allow
+#     port: "9100"
+#     proto: "tcp"
+#   when: ansible_facts['os_family']  == "Debian"
 
 
 - name: Check if node exporter emits metrices

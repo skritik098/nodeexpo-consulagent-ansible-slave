@@ -2,23 +2,35 @@
 - hosts: node_exporter
   become: yes
   become_method: sudo
+  tags:
+    - exporter
+    - install
   roles:
     - prometheus_node_exporter
 
 - hosts: all
   become: yes
   become_method: sudo
+  tags:
+    - install
+    - consul
   roles:
     - consul_install
 
 - hosts: bootstrap
   become: yes
   become_method: sudo
+  tags:
+    - consul
+    - bootstrap
   roles:
     - consul_bootstrap
 
 - hosts: consul_agent
   become: yes
   become_method: sudo
+  tags:
+    - consul
+    - agent
   roles:
     - consul_client

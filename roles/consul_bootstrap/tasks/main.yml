@@ -17,6 +17,17 @@
     group: "{{ consul_groupname }}"
     mode: 0640
   notify: systemd_reload
+  when: ansible_facts['os_family'] != "Debian"
+
+- name: Copy the Consul Systemd file
+  template:
+    src: consul.service.ubuntu.j2
+    dest: "/etc/systemd/system/consul.service"
+    owner: "{{ consul_username }}"
+    group: "{{ consul_groupname }}"
+    mode: 0640
+  notify: systemd_reload
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: Flushing the handler
   meta: flush_handlers
