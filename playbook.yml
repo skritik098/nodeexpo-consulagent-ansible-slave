@@ -5,9 +5,20 @@
   roles:
     - prometheus_node_exporter
 
-- hosts: consul_agent
+- hosts: all
   become: yes
   become_method: sudo
   roles:
     - consul_install
-    - consul_configure
+
+- hosts: bootstrap
+  become: yes
+  become_method: sudo
+  roles:
+    - consul_bootstrap
+
+- hosts: consul_agent
+  become: yes
+  become_method: sudo
+  roles:
+    - consul_client

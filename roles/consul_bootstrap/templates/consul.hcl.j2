@@ -1,4 +1,4 @@
-retry_join= ["{{ hostvars[]['ansible_default_ipv4']['address'] }}"]
+retry_join= ["{{ inventory_hostname }}"]
 datacenter= "{{ consul_datacenter_name }}"
 data_dir= "{{ consul_data_dir }}"
 encrypt= "{{ consul_key.stdout }}"

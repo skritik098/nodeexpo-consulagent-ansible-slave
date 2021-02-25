@@ -1,3 +1,0 @@
-consul_config_dir: "/etc/consul.d"
-client_address: "0.0.0.0"
-server_bool: "true"

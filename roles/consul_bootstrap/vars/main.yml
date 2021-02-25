@@ -1,3 +1,5 @@
+---
+# vars file for consul_bootstrap
 version: 1.8.3-2
 latest: true
 consul_config_dir: "/etc/consul.d"
@@ -8,4 +10,4 @@ consul_data_dir: "/opt/consul/data"
 consul_username: "consul"
 consul_groupname: "consul"
 log_level: "INFO"
-consul_server: ""
+enable_script_check: "true"
