@@ -1,0 +1,12 @@
+retry_join= ["{{ hostvars[]['ansible_default_ipv4']['address'] }}"]
+datacenter= "{{ consul_datacenter_name }}"
+data_dir= "{{ consul_data_dir }}"
+encrypt= "{{ consul_key.stdout }}"
+server={{ server_bool }}
+log_level= "{{ log_level }}"
+bind_addr= "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+client_addr= "{{ client_address }}"
+enable_syslog="{{  }}"
+node_meta[
+    server_type= "application"
+]
