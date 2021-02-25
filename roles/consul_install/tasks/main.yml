@@ -26,6 +26,8 @@
     name: consul
     state: present
   when: ansible_facts['os_family'] == "Debian"
+
+  
 # - name: Add repository
 #   yum_repository:
 #     name: Consul
