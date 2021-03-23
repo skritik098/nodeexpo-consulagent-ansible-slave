@@ -6,7 +6,7 @@ After=network-online.target
 [Service]
 Environment=GOMAXPROCS=2
 Restart=on-failure
-ExecStart=/usr/bin/consul agent -server -ui -data-dir={{ consul_data_dir }} -node={{ inventory_hostname }} -config-dir={{ consul_config_dir }} -enable-script-checks={{ enable_script_check }}
+ExecStart=/usr/bin/consul agent -ui -data-dir={{ consul_data_dir }} -node={{ inventory_hostname }} -config-dir={{ consul_config_dir }} -enable-script-checks={{ enable_script_check }}
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM
 

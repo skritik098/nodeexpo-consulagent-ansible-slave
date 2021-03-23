@@ -58,6 +58,7 @@
 - name: Generate the consul encryption key
   command: "consul keygen"
   register: consul_key
+  run_once: true
 
 - name: Create consul agent config dirs
   file:

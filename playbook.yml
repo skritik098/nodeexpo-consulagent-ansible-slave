@@ -14,6 +14,11 @@
   tags:
     - install
     - consul
+  pre_tasks:
+    - name: remove the folder
+      file:
+        path: "{{ consul_data_dir }}"
+        state: absent
   roles:
     - consul_install
 
