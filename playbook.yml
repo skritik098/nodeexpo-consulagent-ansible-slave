@@ -4,7 +4,6 @@
   become_method: sudo
   tags:
     - exporter
-    - install
   roles:
     - prometheus_node_exporter
 
